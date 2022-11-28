@@ -23,10 +23,17 @@ jobs:
       - name: Build with Gradle
         uses: gradle/gradle-build-action@v2
         with:
-          arguments: build publish
+          arguments: build
         env:
           GH_USER: ${{ secrets.HUB_USER }}
           GH_TOKEN: ${{ secrets.HUB_TOKEN }}
+      - name: Publish with Gradle
+        uses: gradle/gradle-build-action@v2
+        with:
+          arguments: publish
+        env:
+          GH_USER: ${{ secrets.GITHUB_ACTOR }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Remove Extra JARs
         run: rm -f {fabric,forge}/build/libs/*{sources,dev,shadow}*.jar
       - name: Move Fabric JARs
