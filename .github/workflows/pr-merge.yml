@@ -29,16 +29,25 @@ jobs:
         uses: gradle/gradle-build-action@v2
         with:
           arguments: incrementSemanticVersion --major
+        env:
+          GH_USER: ${{ secrets.HUB_USER }}
+          GH_TOKEN: ${{ secrets.HUB_TOKEN }}
       - name: Apply version bump (minor)
         if: contains(github.event.pull_request.labels.*.name, 'minor')
         uses: gradle/gradle-build-action@v2
         with:
           arguments: incrementSemanticVersion --minor
+        env:
+          GH_USER: ${{ secrets.HUB_USER }}
+          GH_TOKEN: ${{ secrets.HUB_TOKEN }}
       - name: Apply version bump (patch)
         if: contains(github.event.pull_request.labels.*.name, 'patch')
         uses: gradle/gradle-build-action@v2
         with:
           arguments: incrementSemanticVersion --patch
+        env:
+          GH_USER: ${{ secrets.HUB_USER }}
+          GH_TOKEN: ${{ secrets.HUB_TOKEN }}
       - name: Commit version bump
         run: |
           git add version.properties
