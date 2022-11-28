@@ -25,8 +25,8 @@ jobs:
         with:
           arguments: build publish
         env:
-          GH_USER: ${{ secrets.GITHUB_ACTOR }}
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_USER: ${{ secrets.HUB_USER }}
+          GH_TOKEN: ${{ secrets.HUB_TOKEN }}
       - name: Remove Extra JARs
         run: rm -f {fabric,forge}/build/libs/*{sources,dev,shadow}*.jar
       - name: Move Fabric JARs
