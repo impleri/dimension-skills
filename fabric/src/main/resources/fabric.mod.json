@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "id": "dimensionskills",
+  "version": "${version}",
+  "name": "Dimension Skills",
+  "description": "A library mod that exposes KubeJS methods to cancel dimensional travel.",
+  "authors": [
+    "impleri"
+  ],
+  "contact": {
+    "homepage": "https://github.com/impleri/dimension-skills",
+    "sources": "https://github.com/impleri/dimension-skills",
+    "issues": "https://github.com/impleri/dimension-skills/issues"
+  },
+  "license": "MIT",
+  "icon": "assets/dimensionskills/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "net.impleri.dimensionskills.fabric.DimensionSkillsFabric"
+    ]
+  },
+  "mixins": [
+    "dimensionskills.mixins.json"
+  ],
+  "depends": {
+    "fabric": "*",
+    "minecraft": ">=1.19.2",
+    "architectury": ">=6.2.43",
+    "playerskills": ">=1.0.0"
+  }
+}
