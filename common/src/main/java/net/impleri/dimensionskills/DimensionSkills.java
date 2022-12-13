@@ -1,7 +1,7 @@
 package net.impleri.dimensionskills;
 
 import net.impleri.dimensionskills.integrations.kubejs.DimensionSkillsPlugin;
-import net.impleri.playerskills.PlayerSkillsLogger;
+import net.impleri.playerskills.utils.PlayerSkillsLogger;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
 
