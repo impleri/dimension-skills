@@ -20,7 +20,7 @@ public class RestrictionsRegistrationEventJS extends ServerEventJS {
     }
 
     public void restrict(String dimensionName, @NotNull Consumer<RestrictionJS.Builder> consumer) {
-        RegistrationType<Level> registrationType = new RegistrationType<Level>(dimensionName, Registry.DIMENSION_REGISTRY);
+        RegistrationType<Level> registrationType = new RegistrationType<>(dimensionName, Registry.DIMENSION_REGISTRY);
 
         registrationType.ifNamespace(namespace -> restrictNamespace(namespace, consumer));
         registrationType.ifName(name -> restrictDimension(name, consumer));
