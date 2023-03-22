@@ -13,9 +13,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.level.Level;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class RestrictionJS extends Restriction {
     private static final ResourceKey<Registry<Restriction>> key = ResourceKey.createRegistryKey(SkillResourceLocation.of("dimension_restriction_builders_registry"));
 
@@ -26,22 +23,21 @@ public class RestrictionJS extends Restriction {
                 dimension,
                 builder.condition,
                 builder.accessible,
-                builder.sources,
+                builder.includeDimensions,
+                builder.excludeDimensions,
+                builder.includeBiomes,
+                builder.excludeBiomes,
                 builder.replacement
         );
     }
 
     public static class Builder extends AbstractRestrictionBuilder<Restriction> {
         public boolean accessible = true;
-        public List<ResourceLocation> sources = new ArrayList<>();
         public Level replacement;
-
-        private final MinecraftServer server;
 
         @HideFromJS
         public Builder(ResourceLocation id, MinecraftServer server) {
-            super(id);
-            this.server = server;
+            super(id, server);
         }
 
         public Builder replaceWith(String replacement) {
@@ -66,14 +62,6 @@ public class RestrictionJS extends Restriction {
 
         public Builder inaccessible() {
             this.accessible = false;
-
-            return this;
-        }
-
-        public Builder from(String origin) {
-            var name = SkillResourceLocation.ofMinecraft(origin);
-
-            this.sources.add(name);
 
             return this;
         }

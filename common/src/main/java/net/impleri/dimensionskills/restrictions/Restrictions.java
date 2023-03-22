@@ -2,7 +2,7 @@ package net.impleri.dimensionskills.restrictions;
 
 import net.impleri.dimensionskills.DimensionHelper;
 import net.impleri.dimensionskills.DimensionSkills;
-import net.impleri.playerskills.api.RestrictionsApi;
+import net.impleri.playerskills.restrictions.RestrictionsApi;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
@@ -37,26 +37,12 @@ public class Restrictions extends RestrictionsApi<Level, Restriction> {
         };
     }
 
-    private Predicate<Restriction> createExtraFilter(Level source) {
-        return restriction -> {
-            var isEmpty = restriction.sources.isEmpty();
-            var targetIncludesSource = restriction.sources.contains(getTargetName(source));
-            DimensionSkills.LOGGER.info(
-                    "Testing if {} works from {}. Empty? {} or Includes? {}",
-                    getTargetName(restriction.target),
-                    getTargetName(source),
-                    isEmpty,
-                    targetIncludesSource
-            );
-            return isEmpty || targetIncludesSource;
-        };
-    }
-
     @Nullable
     public Level getReplacementFor(Player player, Level target, Level source) {
-        var extraFilter = createExtraFilter(source);
-        var destination = getReplacementFor(player, target, extraFilter);
-        var allowed = canPlayer(player, destination, extraFilter, "accessible");
+        var inDimension = getTargetName(source);
+        var inBiome = source.getBiome(player.getOnPos()).unwrapKey().orElseThrow().location();
+        var destination = getReplacementFor(player, target, inDimension, inBiome);
+        var allowed = canPlayer(player, destination, inDimension, inBiome, "accessible");
 
         DimensionSkills.LOGGER.info(
                 "{} should be travelling from {} to {} instead of {}? {}",
