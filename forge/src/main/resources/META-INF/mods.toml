@@ -1,5 +1,5 @@
 modLoader = "javafml"
-loaderVersion = "[43,)"
+loaderVersion = "[40.2,)"
 issueTrackerURL = "https://github.com/impleri/dimension-skills/issues"
 license = "MIT"
 
@@ -16,27 +16,27 @@ A library mod that exposes KubeJS methods to cancel dimensional travel.
 [[dependencies.dimensionskills]]
 modId = "playerskills"
 mandatory = true
-versionRange = "[1.7,)"
+versionRange = "[1.0,)"
 ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.dimensionskills]]
 modId = "forge"
 mandatory = true
-versionRange = "[43,)"
+versionRange = "[40,)"
 ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.dimensionskills]]
 modId = "minecraft"
 mandatory = true
-versionRange = "[1.19.2]"
+versionRange = "[1.18.2]"
 ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.dimensionskills]]
 modId = "architectury"
 mandatory = true
-versionRange = "[6.2.43,)"
+versionRange = "[4.11.89,)"
 ordering = "AFTER"
 side = "BOTH"
