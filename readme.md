@@ -15,12 +15,15 @@ accessible.
 
 ### Register
 
-We use the `DimensionSkillEvents.register` ***server*** event to register dimension restrictions. If the player
-***matches*** the criteria, the following restrictions are applied. This can cascade with other restrictions, so any
-restrictions which replaces a dimension will trump any which only add restrictions to the dimension. Also, any
-restrictions which deny the ability will trump any which allow it. We also expose these methods to indicate what
-restrictions are in place for when a player meets that condition. By default, no restrictions are set, so be sure to set
-actual restrictions.
+We use the `dimensionSkills.register` event to register dimension restrictions. If the player ***matches*** the
+criteria,
+the following restrictions are applied. This can cascade with other restrictions, so any restrictions which replaces a
+dimension will trump any which only add restrictions to the dimension. Also, any restrictions which deny the ability
+will trump any which allow it. We also expose these methods to indicate what restrictions are in place for when a player
+meets that condition. By default, no restrictions are set, so be sure to set actual restrictions.
+
+As an extension to PlayerSkills, all
+the [common restriction facets](https://github.com/impleri/player-skills#kubejs-restrictions-api) are usable here.
 
 #### Replacement methods
 
@@ -36,17 +39,10 @@ actual restrictions.
 - `everything`: shorthand to apply the below "deny" abilities
 - `inacessible`: the dimension cannot be accessed
 
-### Condition Methods
-
-- `if`: Restriction applies only if the player meets the condition
-- `unless`: Restriction applies only if the player does not meet the condition
-- `from`: Restriction applies only if the player is in the specified dimension. This can be chained
-  (e.g. `.from('the_nether').from('the_end')`) to add more.
-
 ### Examples
 
 ```js
-DimensionSkillEvents.register((event) => {
+onEvent('dimensionSkills.register', (event) => {
   // Player cannot access the nether until they have gained the access_nether skill
   event.restrict("minecraft:the_nether", (restrict) =>
     restrict.inaccessible().if(player => player.cannot('access_nether'))
@@ -65,7 +61,7 @@ DimensionSkillEvents.register((event) => {
   // Player cannot access the overworld from the Nether if they have not gained the beat_some_boss skill. This does
   // not prevent travel to other dimensions from the Nether or even travel to the Nether 
   event.restrict("minecraft:overworld", (restrict) =>
-    restrict.inaccessible().from("the_nether").unless(player => player.can("beat_some_boss"))
+    restrict.inaccessible().inDimension("the_nether").unless(player => player.can("beat_some_boss"))
   );
 });
 ```
