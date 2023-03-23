@@ -15,8 +15,10 @@ import org.jetbrains.annotations.NotNull;
 import java.util.function.Consumer;
 
 public class RestrictionsRegistrationEventJS extends ServerEventJS {
+    protected final MinecraftServer server;
+
     public RestrictionsRegistrationEventJS(MinecraftServer server) {
-        super(server);
+        this.server = server;
     }
 
     public void restrict(String dimensionName, @NotNull Consumer<RestrictionJS.Builder> consumer) {
