@@ -1,9 +1,13 @@
 package net.impleri.dimensionskills;
 
+import com.mojang.brigadier.CommandDispatcher;
 import dev.architectury.event.events.common.CommandRegistrationEvent;
 import dev.architectury.event.events.common.LifecycleEvent;
 import dev.architectury.platform.Platform;
-import net.impleri.dimensionskills.commands.DimensionSkillsCommands;
+import net.impleri.playerskills.commands.PlayerSkillsCommands;
+import net.minecraft.commands.CommandBuildContext;
+import net.minecraft.commands.CommandSourceStack;
+import net.minecraft.commands.Commands;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
@@ -19,7 +23,11 @@ public class DimensionEvents {
     }
 
     public void registerCommands() {
-        CommandRegistrationEvent.EVENT.register(DimensionSkillsCommands::register);
+        CommandRegistrationEvent.EVENT.register(this::registerDebugCommand);
+    }
+
+    private void registerDebugCommand(CommandDispatcher<CommandSourceStack> dispatcher, CommandBuildContext registry, Commands.CommandSelection selection) {
+        PlayerSkillsCommands.registerDebug(dispatcher, "dimensionskills", PlayerSkillsCommands.toggleDebug("Dimension Skills", DimensionSkills::toggleDebug));
     }
 
     private void onStartup(MinecraftServer minecraftServer) {
