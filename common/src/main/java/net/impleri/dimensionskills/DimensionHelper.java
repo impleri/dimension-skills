@@ -11,7 +11,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.Nullable;
 
-
 public class DimensionHelper {
     public static ResourceLocation getDimensionName(Level level) {
         return level.dimension().location();
